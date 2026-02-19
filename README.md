@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mental Health Journal - Next.js PDP Application
 
-## Getting Started
+## Project Description
 
-First, run the development server:
+A comprehensive mental health journaling application built with Next.js 15, featuring AI-powered content analysis, crisis detection, and a supportive chatbot companion. The app in theory would provide a safe space for users to document their thoughts and feelings while receiving intelligent insights and support...
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Key Features
+
+- **Secure Authentication**: NextAuth.js with Google OAuth and email/password support
+- **AI-Powered Analysis**: OpenAI integration for content moderation and safety detection
+- **Mental Health Chatbot**: GPT-4 powered companion for emotional support and guidance
+- **Real-time Calendar**: Interactive journaling interface with instant updates
+- **Crisis Detection**: Automated identification of concerning content with appropriate resources
+- **Responsive Design**: Tailwind CSS with dark mode support and smooth animations
+
+## Tech Stack
+
+- **Frontend Framework**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS v3, Framer Motion, clsx, tailwind-merge
+- **Authentication**: NextAuth.js, bcryptjs, @next-auth/prisma-adapter
+- **Database**: PostgreSQL with Prisma ORM (@prisma/client, prisma)
+- **AI Services**: OpenAI GPT-4, Content Moderation API
+- **State Management**: React Context API, Custom Hooks
+- **Date Handling**: dayjs for calendar operations
+- **Icons**: Lucide React for iconography
+- **Development Tools**: ESLint, Prettier, PostCSS, Autoprefixer
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── api/               # API Routes (auth, journal, analyze, chatbot)
+│   ├── auth/              # Authentication pages
+│   ├── calendar/          # Main calendar interface
+│   └── layout.tsx         # Root layout with providers
+├── components/             # React Components
+│   ├── ui/                # Reusable UI components
+│   ├── BaseCalendar/      # Calendar functionality
+│   ├── AIChatbot/         # AI chatbot interface
+│   ├── JournalingDrawer/  # Journal entry interface
+│   └── icons/             # Custom SVG icons
+├── hooks/                  # Custom React Hooks
+├── contexts/               # React Context Providers
+├── lib/                    # Utility Libraries
+├── services/               # Business Logic Services
+├── types/                  # TypeScript Definitions
+└── constants/              # Application Constants
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How to Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Install Dependencies**: `npm install`
+2. **Environment Setup**: Configure `.env` with required API keys
+3. **Database Setup**: Run `npx prisma db push` to sync schema
+4. **Development**: `npm run dev` (runs on port 3069)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+```env
+# Database
+DATABASE_URL="postgresql://..."
 
-To learn more about Next.js, take a look at the following resources:
+# Authentication
+NEXTAUTH_SECRET="your-secret"
+NEXTAUTH_URL="http://localhost:3069"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Google OAuth
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# OpenAI
+OPENAI_API_KEY="your-openai-api-key"
+```
 
-## Deploy on Vercel
+## Core Architecture
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Authentication Flow
+- NextAuth.js handles both OAuth and credentials authentication
+- Prisma adapter manages user sessions and database persistence
+- Secure password hashing with bcryptjs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### AI Integration
+- Content analysis using OpenAI's moderation API
+- Crisis detection with automated response systems
+- GPT-4 powered chatbot for emotional support
+
+### State Management
+- React Context for global journal entry state
+- Custom hooks for chatbot and theme management
+- Real-time updates without page refreshes
+
+## Security Features
+
+- **Content and Chat Moderation**: AI-powered safety detection
+- **Crisis Detection and Intervention**: Automated crisis response with emergency resources
+- **Data Privacy**: Secure user data handling and storage (in theory)
+- **Input Validation**: Comprehensive form validation and sanitization (no zod for now)
+
+## Performance Optimizations
+
+- **Code Splitting**: Automatic Next.js code splitting
+- **Image Optimization**: Next.js built-in image optimization
+- **Bundle Optimization**: Keeping dependencies clean
+
+## Development Guidelines
+
+- **TypeScript**: Strict typing throughout the app
+- **Component Structure**: Single responsibility principle
+- **Error Handling**: Comprehensive error boundaries and user feedback (could be more centralised)
+- **Accessibility**: ARIA labels and keyboard navigation support (in some places)
